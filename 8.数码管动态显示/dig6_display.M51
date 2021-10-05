@@ -1,0 +1,195 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        04/19/2016  04:06:52  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+G:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, dig6_display.obj TO dig6_display RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  dig6_display.obj (DIG6_DISPLAY)
+  G:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  dig6_display (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?DIG6_DISPLAY
+            IDATA   0016H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?DIG_INIT?DIG6_DISPLAY
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0053H     UNIT         ?PR?_DIG_CTRL?DIG6_DISPLAY
+            CODE    00EDH     0031H     UNIT         ?PR?TIMER0_INTERRUPT?DIG6_DISPLAY
+            CODE    011EH     0015H     UNIT         ?C_INITSEG
+            CODE    0133H     0010H     UNIT         ?PR?TIMER0_SET?DIG6_DISPLAY
+            CODE    0143H     000AH     UNIT         ?PR?MAIN?DIG6_DISPLAY
+
+
+
+OVERLAY MAP OF MODULE:   dig6_display (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?DIG6_DISPLAY
+  +--> ?C_INITSEG
+
+?PR?MAIN?DIG6_DISPLAY
+  +--> ?PR?DIG_INIT?DIG6_DISPLAY
+  +--> ?PR?TIMER0_SET?DIG6_DISPLAY
+
+*** NEW ROOT ***************************************************
+
+?PR?TIMER0_INTERRUPT?DIG6_DISPLAY
+  +--> ?PR?_DIG_CTRL?DIG6_DISPLAY
+
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/19/2016  04:06:52  PAGE 2
+
+
+
+SYMBOL TABLE OF MODULE:  dig6_display (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:000EH         SEGMENT       ?C_C51STARTUP
+  I:0016H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0011H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:000EH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:000EH         LINE#         133
+  C:0010H         LINE#         134
+  C:0011H         LINE#         135
+  C:0012H         LINE#         136
+  C:0014H         LINE#         185
+  C:0017H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        DIG6_DISPLAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:0133H         PUBLIC        timer0_set
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0143H         PUBLIC        main
+  C:00EDH         PUBLIC        timer0_interrupt
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  C:0003H         PUBLIC        dig_init
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/19/2016  04:06:52  PAGE 3
+
+
+  B:0090H.0       PUBLIC        ADDR0
+  D:008CH         PUBLIC        TH0
+  C:009AH         PUBLIC        _dig_ctrl
+  B:0090H.1       PUBLIC        ADDR1
+  B:0090H.2       PUBLIC        ADDR2
+  B:0090H.3       PUBLIC        ADDR3
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:0008H         PUBLIC        cnt_dig
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.4       PUBLIC        ENLED
+  D:0009H         PUBLIC        display
+  D:00D0H         PUBLIC        PSW
+  D:0015H         PUBLIC        cnt_timer0
+  -------         PROC          DIG_INIT
+  C:0003H         LINE#         24
+  C:0003H         LINE#         25
+  C:0005H         LINE#         26
+  C:0007H         LINE#         27
+  -------         ENDPROC       DIG_INIT
+  -------         PROC          _DIG_CTRL
+  D:0007H         SYMBOL        s
+  C:009AH         LINE#         29
+  C:009AH         LINE#         30
+  C:009DH         LINE#         31
+  C:00B1H         LINE#         32
+  C:00BBH         LINE#         33
+  C:00C5H         LINE#         34
+  C:00CFH         LINE#         35
+  C:00D9H         LINE#         36
+  C:00E3H         LINE#         37
+  C:00ECH         LINE#         38
+  C:00ECH         LINE#         39
+  C:00ECH         LINE#         40
+  -------         ENDPROC       _DIG_CTRL
+  -------         PROC          TIMER0_SET
+  C:0133H         LINE#         42
+  C:0133H         LINE#         43
+  C:0136H         LINE#         44
+  C:0139H         LINE#         45
+  C:013CH         LINE#         46
+  C:013EH         LINE#         47
+  C:0140H         LINE#         48
+  C:0142H         LINE#         49
+  -------         ENDPROC       TIMER0_SET
+  -------         PROC          MAIN
+  C:0143H         LINE#         51
+  C:0143H         LINE#         52
+  C:0146H         LINE#         53
+  C:0149H         LINE#         54
+  C:014BH         LINE#         55
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0_INTERRUPT
+  C:00EDH         LINE#         58
+  C:00F6H         LINE#         59
+  C:00FDH         LINE#         60
+  C:0102H         LINE#         61
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/19/2016  04:06:52  PAGE 4
+
+
+  C:0109H         LINE#         62
+  C:010EH         LINE#         64
+  C:0110H         LINE#         65
+  C:0113H         LINE#         66
+  C:0115H         LINE#         67
+  C:0117H         LINE#         68
+  -------         ENDPROC       TIMER0_INTERRUPT
+  -------         ENDMOD        DIG6_DISPLAY
+
+Program Size: data=23.0 xdata=0 code=330
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

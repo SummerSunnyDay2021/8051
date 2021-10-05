@@ -1,0 +1,93 @@
+C51 COMPILER V8.06   DIG6_DISPLAY                                                          04/19/2016 04:06:52 PAGE 1   
+
+
+C51 COMPILER V8.06, COMPILATION OF MODULE DIG6_DISPLAY
+OBJECT MODULE PLACED IN dig6_display.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE dig6_display.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*----------------------------------------------
+   2          实验：点亮六位数码管
+   3          时间： 2016-4-19 11:12 AM ★2
+   4          
+   5                  数码管译码表：
+   6                  0-9             0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90,
+   7                  A-F             0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8E
+   8          
+   9          ----------------------------------------------*/
+  10          
+  11          #include <reg52.h>
+  12          
+  13          sbit ADDR2 = P1^2;
+  14          sbit ADDR1 = P1^1;
+  15          sbit ADDR0 = P1^0;
+  16          
+  17          sbit ADDR3 = P1^3;
+  18          sbit ENLED = P1^4;
+  19          
+  20          unsigned int display[6] = { 0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92 }; 
+  21          unsigned char cnt_timer0 = 0;
+  22          unsigned char cnt_dig = 0;
+  23          
+  24          void dig_init(void) {
+  25   1              ADDR3 = 1;
+  26   1              ENLED = 0;
+  27   1      }
+  28          
+  29          void dig_ctrl(unsigned char s) {
+  30   1              P0 = 0xFF;
+  31   1              switch(s) {
+  32   2                      case 0: ADDR2 = 0, ADDR1 = 0, ADDR0 = 0; P0 = display[0]; break;
+  33   2                      case 1: ADDR2 = 0, ADDR1 = 0, ADDR0 = 1; P0 = display[1]; break;
+  34   2                      case 2: ADDR2 = 0, ADDR1 = 1, ADDR0 = 0; P0 = display[2]; break;
+  35   2                      case 3: ADDR2 = 0, ADDR1 = 1, ADDR0 = 1; P0 = display[3]; break;
+  36   2                      case 4: ADDR2 = 1, ADDR1 = 0, ADDR0 = 0; P0 = display[4]; break;
+  37   2                      case 5: ADDR2 = 1, ADDR1 = 0, ADDR0 = 1; P0 = display[5]; break;
+  38   2                      default: break;
+  39   2              }
+  40   1      }
+  41          
+  42          void timer0_set(void) {
+  43   1              TMOD = 0x02;    // 8 位自动重装模式，定时 50 us
+  44   1              TH0 = 0xD2;
+  45   1              TL0 = 0xD2;
+  46   1              EA = 1;
+  47   1              ET0 = 1;
+  48   1              TR0 = 1;
+  49   1      }
+  50          
+  51          void main(void){
+  52   1              dig_init();
+  53   1              timer0_set();
+  54   1              TF0 = 1;
+  55   1              while(1);
+C51 COMPILER V8.06   DIG6_DISPLAY                                                          04/19/2016 04:06:52 PAGE 2   
+
+  56   1      }
+  57          
+  58          void timer0_interrupt(void) interrupt 1 {
+  59   1              if(cnt_timer0>=19){
+  60   2                      dig_ctrl(cnt_dig);
+  61   2                      if(cnt_dig>=6)
+  62   2                              cnt_dig = 0;
+  63   2                      else
+  64   2                              cnt_dig = cnt_dig + 1;
+  65   2                      cnt_timer0 = 0;
+  66   2              }else
+  67   1                      cnt_timer0 = cnt_timer0 + 1;
+  68   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    163    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

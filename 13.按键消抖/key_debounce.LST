@@ -1,0 +1,91 @@
+C51 COMPILER V9.00   KEY_DEBOUNCE                                                          04/24/2016 08:45:05 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE KEY_DEBOUNCE
+OBJECT MODULE PLACED IN key_debounce.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE key_debounce.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          
+   3          sbit KeyIn1 = P2^4;
+   4          sbit KeyOut1 = P2^3;
+   5          sbit ADDR0 = P1^0;
+   6          sbit ADDR1 = P1^1;
+   7          sbit ADDR2 = P1^2;
+   8          sbit ADDR3 = P1^3;
+   9          sbit ENLED = P1^4;
+  10          sbit LED0 = P0^0;
+  11          
+  12          void timer0_set(void);
+  13          void timer0_init(void);
+  14          void led_init(void);
+  15          void key_set(void);
+  16          
+  17          void main(void){
+  18   1              timer0_init();
+  19   1              led_init();
+  20   1              key_set();
+  21   1              while(1);
+  22   1      }
+  23          
+  24          void timer0_set(void){
+  25   1              TH0 = 0xFC ;            // 20ms 
+  26   1              TL0 = 0x65 ;    
+  27   1      }
+  28          
+  29          void timer0_init(void){
+  30   1              TMOD = 0x01;
+  31   1              timer0_set();
+  32   1              EA = 1;
+  33   1              ET0 = 1;
+  34   1              TR0 = 1;
+  35   1      }
+  36          
+  37          void key_set(void){
+  38   1              KeyIn1 = 0;
+  39   1              KeyOut1 = 1;
+  40   1      }
+  41          
+  42          void led_init(void) {
+  43   1              ADDR0 = 0;
+  44   1              ADDR1 = 1;
+  45   1              ADDR2 = 1;
+  46   1              ADDR3 = 1;
+  47   1              ENLED = 0;      
+  48   1      }
+  49          
+  50          void timer0_interrupt(void) interrupt 1 {
+  51   1              static unsigned char key_buff = 0xFF;
+  52   1              static bit key_state = 1;
+  53   1              static bit tmp = 1;
+  54   1              tmp = key_state;
+  55   1              timer0_set();
+C51 COMPILER V9.00   KEY_DEBOUNCE                                                          04/24/2016 08:45:05 PAGE 2   
+
+  56   1              key_buff = (key_buff<<1) | KeyOut1;
+  57   1              if(key_buff==0x00){
+  58   2                      key_state = 0;
+  59   2              }else{
+  60   2                      key_state = 1;
+  61   2              }
+  62   1              if( (!tmp)&&(key_state) )
+  63   1                      LED0 = !LED0;
+  64   1      }
+  65          
+  66          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

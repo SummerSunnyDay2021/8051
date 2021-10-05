@@ -1,0 +1,84 @@
+C51 COMPILER V9.00   PWM                                                                   05/11/2016 12:28:47 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE PWM
+OBJECT MODULE PLACED IN pwm.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE pwm.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include"io.h"
+   3          
+   4          bit pwm_out = 0;
+   5          unsigned long freq = 200;
+   6          unsigned char duty = 2;
+   7          unsigned char on_th0, on_tl0, off_th0, off_tl0;
+   8          
+   9          void led_init(void);
+  10          void timer0_init(void);
+  11          void timer0_calc(void);
+  12          void timer0_config(void);
+  13          
+  14          void main(void){
+  15   1              led_init();
+  16   1              timer0_init();
+  17   1              timer0_calc();
+  18   1              TF0 = 1;
+  19   1              while(1){
+  20   2                      if(TF0){
+  21   3                              TF0 = 0;
+  22   3                              timer0_config();
+  23   3                              pwm_out = !pwm_out;
+  24   3                              Led0 = !Led0;
+  25   3                      }
+  26   2              }
+  27   1      }
+  28          
+  29          
+  30          void led_init(void){
+  31   1              ADDR0 = 0;
+  32   1              ADDR1 = 1;
+  33   1              ADDR2 = 1;
+  34   1              ADDR3 = 1;
+  35   1              ENLED = 0;      
+  36   1      }
+  37          
+  38          void timer0_init(void){
+  39   1              TMOD = 0x01;    // 16 位自动重装模式
+  40   1              TR0 = 1;
+  41   1      }
+  42          
+  43          void timer0_calc(void){
+  44   1              on_th0  = (unsigned char)((65536 - (unsigned long)9126*duty/freq)>>8);
+  45   1              on_tl0  = (unsigned char)(65536 - (unsigned long)9126*duty/freq);
+  46   1              off_th0 = (unsigned char)((65536 - (unsigned long)9126*(100-duty)/freq)>>8);
+  47   1              off_tl0 = (unsigned char)(65536 - (unsigned long)9126*(100-duty)/freq);
+  48   1      }
+  49          
+  50          
+  51          void timer0_config(void){
+  52   1              if(pwm_out){
+  53   2                      TH0 = off_th0;
+  54   2                      TL0 = off_tl0;
+  55   2              }else{
+C51 COMPILER V9.00   PWM                                                                   05/11/2016 12:28:47 PAGE 2   
+
+  56   2                      TH0 = on_th0;
+  57   2                      TL0 = on_tl0;
+  58   2              }
+  59   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    212    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

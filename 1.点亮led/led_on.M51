@@ -1,0 +1,152 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/03/2018  11:05:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+G:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, led_on.obj TO led_on RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  led_on.obj (LED_ON)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+
+
+LINK MAP OF MODULE:  led_on (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         _DATA_GROUP_
+            IDATA   0010H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    08F6H     0040H     UNIT         ?PR?MAIN?LED_ON
+            CODE    0936H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0942H     000BH     UNIT         ?PR?LED_INIT?LED_ON
+            CODE    094DH     0008H     UNIT         ?CO?LED_ON
+
+
+
+OVERLAY MAP OF MODULE:   led_on (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?LED_ON
+
+?PR?MAIN?LED_ON                0008H    0008H
+  +--> ?CO?LED_ON
+  +--> ?PR?LED_INIT?LED_ON
+
+
+
+SYMBOL TABLE OF MODULE:  led_on (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0936H         SEGMENT       ?C_C51STARTUP
+  I:0010H         SEGMENT       ?STACK
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/03/2018  11:05:44  PAGE 2
+
+
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0939H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0936H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0936H         LINE#         133
+  C:0938H         LINE#         134
+  C:0939H         LINE#         135
+  C:093AH         LINE#         136
+  C:093CH         LINE#         185
+  C:093FH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        LED_ON
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:08F6H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:094DH         SYMBOL        _?ix1000
+  B:0090H.0       PUBLIC        ADDR0
+  C:0942H         PUBLIC        led_init
+  B:0090H.1       PUBLIC        ADDR1
+  B:0090H.2       PUBLIC        ADDR2
+  B:0090H.3       PUBLIC        ADDR3
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.4       PUBLIC        ENLED
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          LED_INIT
+  C:0942H         LINE#         20
+  C:0942H         LINE#         21
+  C:0944H         LINE#         22
+  C:0946H         LINE#         23
+  C:0948H         LINE#         24
+  C:094AH         LINE#         25
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/03/2018  11:05:44  PAGE 3
+
+
+  C:094CH         LINE#         26
+  -------         ENDPROC       LED_INIT
+  -------         PROC          MAIN
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0008H         SYMBOL        num
+  -------         ENDDO         
+  C:08F6H         LINE#         28
+  C:08F6H         LINE#         30
+  C:0909H         LINE#         31
+  C:090CH         LINE#         32
+  C:090FH         LINE#         33
+  C:0911H         LINE#         34
+  C:0932H         LINE#         35
+  C:0934H         LINE#         36
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        LED_ON
+
+  -------         MODULE        ?C?COPY
+  C:08D0H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0062H BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=17.0 xdata=0 code=344
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

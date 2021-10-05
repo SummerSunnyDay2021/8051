@@ -1,0 +1,102 @@
+C51 COMPILER V8.06   TIMER                                                                 04/17/2016 08:19:02 PAGE 1   
+
+
+C51 COMPILER V8.06, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN timer.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE timer.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2             ¶¨Ê±Æ÷ÊµÑé 
+   3             Ê±¼ä£º 2016-4-17 9:54 *7
+   4          
+   5             ¼ÙÉèÎÒÃÇÐèÒª¶¨Ê± 50 ms£¬ÓÃÓÚ led µÄÉÁË¸
+   6                          
+   7           1. TMOD ¶¨Ê±Æ÷Ä£Ê½¼Ä´æÆ÷£¬TMOD ¹² 8 Î»£¬µÍ 4 Î»Îª timer0£¬ ¸ß 4 Î»Îª timer1
+   8                 7£¬   6£¬  5£¬  4£¬ |    3£¬   2£¬  1£¬  0
+   9              GATE£¬ C/T£¬ M1£¬ M0£¬ | GATE£¬ C/T£¬ M1£¬ M0 -- ²»¿ÉÎ»Ñ°Ö·
+  10              
+  11                  ÕâÀïÖ»Éæ¼° timer0£¬¸ß 4 Î»ÕâÀï²»¹Ü£¬
+  12                          -- GATE Î»£¬ ÖÃ 1 ÓÃÓÚ²âÁ¿Íâ²¿ÐÅºÅµÄÖÜÆÚ£¬ÕâÀï²»ÓÃÎÒÃÇÖÃ 0
+  13                          -- C/T Î»£¬ ÖÃ 1 ÓÃ×÷¼ÆÊ±Æ÷£¬ ÖÃ 0 ÓÃÓÚ¶¨Ê±Æ÷
+  14                          -- M1/M0 Î»Éè¶¨¹¤×÷·½Ê½
+  15                                  == 0/0£¬ ¼æÈÝ 8048 µÄ 13 Î»¶¨Ê±Æ÷Ä£Ê½£¬ÎÒÃÇ²»ÓÃ
+  16                                  == 0/1£¬ 16 Î»¶¨Ê±Ä£Ê½
+  17                                  == 1/0£¬ 8 Î»×Ô¶¯ÖØ×°£¬Òç³öºó½« THx ÖÐµÄÖµ×Ô¶¯ÖØ×°µ½ TLx ÖÐ
+  18                                  == 1/1£¬ ½ûÓÃ ¶¨Ê±Æ÷ timer1£¬ °Ñ timer0 ÉèÎªÁ½¸ö 8 Î»¶¨Ê±Æ÷
+  19                  ËùÒÔÎÒÃÇµÄÉèÖÃÖµÎª 8'bXXXX_0001
+  20          
+  21           2. Éè¶¨¶¨Ê±Æ÷´æ´¢¼Ä´æÆ÷
+  22                  TH1£¬ TL1£¬ TH0£¬ TL0 --- ¸´Î»×Ô¶¯¹éÁã
+  23                  ´æ´¢¼Ä´æÆ÷×î¶à 16 Î»£¬¼´ 0x0000 -- 0xFFFF£¬¶¨Ê±Æ÷Ã¿¸ö»úÆ÷ÖÜÆÚ¼Ó 1£¬¶ø 12 ¸öÊ±ÖÓÖÜÆÚµÈÓÚ 1 ¸ö»úÆ÷ÖÜÆÚ£¬¼ÙÉ
+             -èÐèÒª¶¨Ê± t ms£¬°åÉÏµÄ¾§ÕñÎª 11.0592MHz£¬ÄÇÃ´¶¨Ê±Æ÷´æ´¢¼Ä´æÆ÷µÄ¼ÆËã·½·¨Îª£º
+  24                  Ê×ÏÈ¼ÆËã¾§ÕñÖÜÆÚ£º 1/(11.0592*10^6) ¡Ö 9.04*10^-8 s
+  25                  ¼ÆËã»úÆ÷ÖÜÆÚ£º 9.04*10^-8 * 12 ¡Ö 1.085*10^-6 s
+  26                  ¼ÆËãÐèÒªµÄÖÜÆÚÊý£º 50ms = 0.05 s     0.05/(1.085*10^-6) ¡Ö 46083
+  27                  ×îºóµÃµ½ÐèÒªµÄÖµ£º 0xFFFF = 65535 65535 - 46083 = 19452  19452 = 0x4BFC
+  28                  TH0 = 0x4B, TL0 = 0xFC
+  29                  
+  30          
+  31           3. TCON¡ª¶¨Ê±Æ÷¿ØÖÆ¼Ä´æÆ÷
+  32                    7£¬  6£¬  5£¬  4£¬  3£¬  2£¬  1£¬  0
+  33                  TF1£¬TR1£¬TF0£¬TR0£¬IE1£¬IT1£¬IE0£¬IT0 -- ¿ÉÎ»Ñ°Ö·
+  34                          -- TF0£¬ ¶¨Ê±Æ÷ timer0 Òç³ö±êÊ¶Î»£¬Òç³öºóÓ²¼þÖÃ 1£¬ÐèÒªÈí¼þÇåÁã»òÕßÊ¹ÓÃ¶¨Ê±Æ÷ÖÐ¶ÏÓ²¼þÇåÁã
+  35                          -- TR0£¬ ¶¨Ê±Æ÷ timer0 ¿ØÖÆÎ»£¬ÖÃ 1 Æô¶¯¶¨Ê±Æ÷£¬ÖÃ 0 Í£Ö¹¶¨Ê±Æ÷
+  36                          -- IE0 ºÍ IT0 ÓÃÓÚÍâ²¿ÖÐ¶Ï£¬ÕâÀïÏÈ²»¹Ü
+  37          **/
+  38          
+  39          
+  40          #include <reg52.h>
+  41          
+  42          sbit LED0 = P0^0;
+  43          sbit ADDR0 = P1^0;
+  44          sbit ADDR1 = P1^1;
+  45          sbit ADDR2 = P1^2;
+  46          sbit ADDR3 = P1^3;
+  47          sbit ENLED = P1^4;
+  48          
+  49          void main(void) {
+  50   1      //*******************//
+  51   1              ADDR0 = 0;
+  52   1              ADDR1 = 1;
+  53   1              ADDR2 = 1;
+  54   1              ADDR3 = 1;
+C51 COMPILER V8.06   TIMER                                                                 04/17/2016 08:19:02 PAGE 2   
+
+  55   1              ENLED = 0;      
+  56   1      //******************//
+  57   1              TMOD = 0x01;
+  58   1              TH0 = 0x4B;
+  59   1              TL0 = 0xFC;
+  60   1              TR0 = 1;
+  61   1      //*****************//
+  62   1              while(1){
+  63   2                      unsigned char cnt;
+  64   2                      if(TF0) {
+  65   3                              cnt = cnt + 1;
+  66   3                              TF0 = 0;
+  67   3                              TH0 = 0x4B;
+  68   3                              TL0 = 0xFC;
+  69   3                              if(cnt>=10) {
+  70   4                                      LED0 = !LED0;
+  71   4                                      cnt = 0;
+  72   4                              }       
+  73   3                      }
+  74   2                              
+  75   2              }
+  76   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     48    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

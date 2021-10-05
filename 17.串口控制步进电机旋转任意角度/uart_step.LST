@@ -1,0 +1,109 @@
+C51 COMPILER V9.00   UART_STEP                                                             04/28/2016 05:31:42 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE UART_STEP
+OBJECT MODULE PLACED IN uart_step.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE uart_step.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          
+   3          unsigned char code uart_baud = 256 - 11059200/12/32/9600;
+   4          signed int rotation = 0;
+   5          unsigned char motor_tab[8] = {
+   6                  0x07, 0x03, 0x0B, 0x09, 0x0D, 0x0C, 0x0E, 0x06
+   7          };
+   8          
+   9          void uart_config(void);
+  10          void baud_config(void);
+  11          void timer0_set (void);
+  12          
+  13          void main(void){
+  14   1              uart_config();
+  15   1              baud_config();
+  16   1              timer0_set();
+  17   1              while(1);
+  18   1      }
+  19          
+  20          void uart_config(void){
+  21   1      //      PCON = PCON | 0x80;
+  22   1              SCON = 0x50;
+  23   1              ES = 1;                                 // 串口中断使能
+  24   1      }
+  25          
+  26          void baud_config(void){
+  27   1              TMOD = TMOD & 0x0F;             // 清零 高 8 位
+  28   1              TMOD = TMOD | 0x20;             // 高 8 位设为 4'b0010 即自动重装模式
+  29   1              EA = 1;
+  30   1              IT1 = 0;                                //关闭 定时器 1 中断
+  31   1              TH1 = uart_baud;
+  32   1              TL1 = uart_baud;
+  33   1              TR1 = 1;
+  34   1      }
+  35          
+  36          void timer0_set (void) {
+  37   1              TMOD = TMOD & 0xF0;
+  38   1              TMOD = TMOD | 0x01;     //  定时器0 十六位计数模式
+  39   1              TL0 = 0xCD;                     //      设置为 2ms
+  40   1              TH0 = 0xF8;
+  41   1              ET0 = 1;                        // 打开定时器0 中断
+  42   1              TR0 = 1;                        // 打开定时器0
+  43   1      }
+  44          
+  45          void timer0_interrupt(void) interrupt 1 {
+  46   1              static unsigned char state = 0;
+  47   1              unsigned char tmp;
+  48   1              TL0 = 0xCD;
+  49   1              TH0 = 0xF8;
+  50   1              tmp = P1;
+  51   1              tmp = tmp & 0xF0;
+  52   1              tmp = tmp | motor_tab[state];
+  53   1              P1 = tmp;
+  54   1              if(rotation>0){
+  55   2                      state = state + 1;
+C51 COMPILER V9.00   UART_STEP                                                             04/28/2016 05:31:42 PAGE 2   
+
+  56   2              }
+  57   1      //      else if(rotation<0)     {
+  58   1      //              state = state - 1;
+  59   1      //      }
+  60   1              if(rotation != 0)
+  61   1                      SBUF = rotation;
+  62   1                      
+  63   1              if(state==8){
+  64   2                      state = 0;
+  65   2                      rotation--;
+  66   2              }
+  67   1      //      else if(state==-1) {
+  68   1      //              state = 7;
+  69   1      //              rotation++;
+  70   1      //      }
+  71   1      }
+  72          
+  73          void uart_interrupt(void) interrupt 4 {
+  74   1              if(TI){
+  75   2                      TI = 0;
+  76   2              }
+  77   1              if(RI){
+  78   2                      RI = 0;
+  79   2      //              if(SBUF>0x7F)
+  80   2      //                      rotation = (SBUF&0x7F)*-64*8;
+  81   2      //              if(SBUF<=0x7F)
+  82   2                              rotation = ((SBUF/16*10)+SBUF%16)*512/360;
+  83   2              }
+  84   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    218    ----
+   CONSTANT SIZE    =      1    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

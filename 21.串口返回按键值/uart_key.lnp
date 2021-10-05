@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"key.obj",
+"main.obj",
+"uart.obj" 
+TO "uart_key" 
+RAMSIZE(256) 

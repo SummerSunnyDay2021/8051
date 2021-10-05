@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"1602_driver.obj",
+"1602_uart.obj",
+"uart_driver.obj" 
+TO "1602_uart" 
+RAMSIZE(256) 

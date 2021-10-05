@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"key_arrays.obj" 
+TO "key_arrays" 
+RAMSIZE(256) 

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"printf.obj" 
+TO "printf" 
+RAMSIZE(256) 

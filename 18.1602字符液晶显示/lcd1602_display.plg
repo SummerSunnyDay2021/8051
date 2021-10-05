@@ -1,0 +1,16 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Keil_51\18.1602×Ö·ûÒº¾§ÏÔÊ¾\lcd1602_display.uvproj
+Project File Date:  04/28/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling lcd1602_display.c...
+linking...
+Program Size: data=24.0 xdata=0 code=320
+creating hex file from "lcd1602_display"...
+"lcd1602_display" - 0 Error(s), 0 Warning(s).

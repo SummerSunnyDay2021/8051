@@ -1,0 +1,276 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/29/2016  12:00:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+G:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, stopwatch.obj TO stopwatch RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  stopwatch.obj (STOPWATCH)
+  G:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?CSTOPTR)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?ULCMP)
+
+
+LINK MAP OF MODULE:  stopwatch (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0019H     UNIT         ?DT?STOPWATCH
+            DATA    0021H     0007H     UNIT         _DATA_GROUP_
+            IDATA   0028H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?DIG_INIT?STOPWATCH
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0159H     UNIT         ?C?LIB_CODE
+            CODE    0167H     0134H     UNIT         ?PR?TIMER0_INTERRUPT?STOPWATCH
+            CODE    029BH     010EH     UNIT         ?PR?_SEC_CALC?STOPWATCH
+            CODE    03A9H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0435H     005EH     UNIT         ?PR?_DIG_SCAN?STOPWATCH
+            CODE    0493H     0024H     UNIT         ?C_INITSEG
+            CODE    04B7H     001BH     UNIT         ?PR?MAIN?STOPWATCH
+            CODE    04D2H     0013H     UNIT         ?PR?TIMER0_SET?STOPWATCH
+
+
+
+OVERLAY MAP OF MODULE:   stopwatch (?C_STARTUP)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?STOPWATCH
+  +--> ?C_INITSEG
+
+?PR?MAIN?STOPWATCH                     -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/29/2016  12:00:14  PAGE 2
+
+
+  +--> ?PR?DIG_INIT?STOPWATCH
+  +--> ?PR?TIMER0_SET?STOPWATCH
+  +--> ?PR?_SEC_CALC?STOPWATCH
+
+?PR?_SEC_CALC?STOPWATCH                0021H    0007H
+
+*** NEW ROOT ***************************************************
+
+?PR?TIMER0_INTERRUPT?STOPWATCH         -----    -----
+  +--> ?PR?_DIG_SCAN?STOPWATCH
+
+
+
+SYMBOL TABLE OF MODULE:  stopwatch (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:03A9H         SEGMENT       ?C_C51STARTUP
+  I:0028H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:03ACH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:03A9H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:03A9H         LINE#         133
+  C:03ABH         LINE#         134
+  C:03ACH         LINE#         135
+  C:03ADH         LINE#         136
+  C:03AFH         LINE#         185
+  C:03B2H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        STOPWATCH
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:04D2H         PUBLIC        timer0_set
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/29/2016  12:00:14  PAGE 3
+
+
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:04B7H         PUBLIC        main
+  C:0167H         PUBLIC        timer0_interrupt
+  C:029BH         PUBLIC        _sec_calc
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        sec
+  C:0435H         PUBLIC        _dig_scan
+  D:000CH         PUBLIC        sel
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  C:0003H         PUBLIC        dig_init
+  B:0090H.0       PUBLIC        ADDR0
+  D:008CH         PUBLIC        TH0
+  B:0090H.1       PUBLIC        ADDR1
+  D:000DH         PUBLIC        dig_tab
+  B:0090H.2       PUBLIC        ADDR2
+  B:0090H.3       PUBLIC        ADDR3
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:0017H         PUBLIC        sec_cnt
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.4       PUBLIC        ENLED
+  D:001BH         PUBLIC        display
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:04B7H         LINE#         25
+  C:04B7H         LINE#         26
+  C:04BAH         LINE#         27
+  C:04BDH         LINE#         28
+  C:04BFH         LINE#         29
+  C:04BFH         LINE#         30
+  C:04D0H         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         PROC          _SEC_CALC
+  D:0021H         SYMBOL        sec
+  D:0025H         SYMBOL        p
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:029BH         LINE#         34
+  C:02A9H         LINE#         35
+  C:02AAH         LINE#         36
+  C:02B6H         LINE#         37
+  C:02C4H         LINE#         38
+  C:02E0H         LINE#         39
+  C:02F1H         LINE#         40
+  C:030DH         LINE#         41
+  C:031EH         LINE#         42
+  C:033BH         LINE#         43
+  C:034CH         LINE#         44
+  C:0369H         LINE#         45
+  C:037AH         LINE#         46
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/29/2016  12:00:14  PAGE 4
+
+
+  C:0398H         LINE#         47
+  -------         ENDPROC       _SEC_CALC
+  -------         PROC          DIG_INIT
+  C:0003H         LINE#         50
+  C:0003H         LINE#         51
+  C:0005H         LINE#         52
+  C:0007H         LINE#         53
+  -------         ENDPROC       DIG_INIT
+  -------         PROC          _DIG_SCAN
+  D:0007H         SYMBOL        s
+  D:0001H         SYMBOL        p
+  C:0435H         LINE#         55
+  C:0435H         LINE#         56
+  C:0438H         LINE#         57
+  C:044CH         LINE#         58
+  C:0458H         LINE#         59
+  C:0463H         LINE#         60
+  C:046EH         LINE#         61
+  C:0479H         LINE#         62
+  C:0484H         LINE#         63
+  C:0492H         LINE#         64
+  C:0492H         LINE#         65
+  C:0492H         LINE#         66
+  -------         ENDPROC       _DIG_SCAN
+  -------         PROC          TIMER0_SET
+  C:04D2H         LINE#         68
+  C:04D2H         LINE#         69
+  C:04D5H         LINE#         70
+  C:04D8H         LINE#         71
+  C:04DBH         LINE#         72
+  C:04DEH         LINE#         73
+  C:04E0H         LINE#         74
+  C:04E2H         LINE#         75
+  C:04E4H         LINE#         76
+  -------         ENDPROC       TIMER0_SET
+  -------         PROC          TIMER0_INTERRUPT
+  C:0167H         LINE#         78
+  C:0184H         LINE#         79
+  C:0187H         LINE#         80
+  C:018AH         LINE#         82
+  C:0191H         LINE#         83
+  C:0195H         LINE#         85
+  C:0198H         LINE#         87
+  C:01B4H         LINE#         88
+  C:01B6H         LINE#         89
+  C:01D1H         LINE#         90
+  C:01D3H         LINE#         91
+  C:01EEH         LINE#         92
+  C:01F0H         LINE#         93
+  C:020AH         LINE#         94
+  C:020CH         LINE#         95
+  C:0226H         LINE#         96
+  C:0229H         LINE#         98
+  C:023DH         LINE#         99
+  C:0254H         LINE#         100
+  C:0254H         LINE#         101
+  C:0260H         LINE#         102
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/29/2016  12:00:14  PAGE 5
+
+
+  C:0275H         LINE#         104
+  C:0275H         LINE#         105
+  C:0280H         LINE#         106
+  -------         ENDPROC       TIMER0_INTERRUPT
+  -------         ENDMOD        STOPWATCH
+
+  -------         MODULE        ?C?CLDPTR
+  C:000EH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0027H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0054H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0066H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?ULDIV
+  C:00C4H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+  -------         MODULE        ?C?ULCMP
+  C:0156H         PUBLIC        ?C?ULCMP
+  -------         ENDMOD        ?C?ULCMP
+
+Program Size: data=41.0 xdata=0 code=1250
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

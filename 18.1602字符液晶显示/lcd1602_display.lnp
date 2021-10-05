@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"lcd1602_display.obj" 
+TO "lcd1602_display" 
+RAMSIZE(256) 

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"dig_counter.obj" 
+TO "dig_counter" 
+RAMSIZE(256) 

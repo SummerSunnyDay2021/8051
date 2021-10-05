@@ -1,0 +1,64 @@
+C51 COMPILER V9.55   LED_ON                                                                10/03/2018 11:02:34 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE LED_ON
+OBJECT MODULE PLACED IN led_on.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE led_on.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF led_on.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
+   1          /*
+   2           * led Çý¶¯ 
+   3           * 2016-4-15 *5 17:25
+   4           ÔÚ kst-51 ¿ª·¢°åÉÏÊµÏÖ led Çý¶¯
+   5          
+   6            µçÂ·Í¼ÃèÊö 8 ¸ö led µÄÕý¼«Í¬Ê±½Óµ½ vcc ±»Ò»¸öÈý¼«¹Ü¿ØÖÆ£¬Èý¼«¹ÜµÄ»ù¼«½Óµ½ÁË LEDS6 ´¦£¬¶ø LEDS6 ±» 74138 ¿
+             -ØÖÆ¡£
+   7            ÏëÒªÔÚ LEDS6 ÉÏÊä³ö ¸ßµçÆ½£¬74138 µÄÊäÈë ADDR ±ØÐë·Ö±ðµÈÓÚ 110£¨000--0000_0001, 001--0000_0010, ..., 110-
+             --0100_0000, 111--1000_0000), ´ËÍâ 74138 µÄÊ¹ÄÜÐÅºÅ ADDR3 ºÍ ENLED ±ØÐëÊÊµ±ÉèÖÃ¡£
+   8          
+   9            led µÄ¸º¼«Á¬½ÓµÄÊ± P0 ¿Ú£¬±»¶ÔÓ¦µÄ P0 ¿ÚÖÃµÍ¾Í¿ÉÒÔµãÁÁ led ÁË¡£
+  10          **/
+  11          
+  12          
+  13          #include <reg52.h>
+  14          sbit ADDR0 = P1^0;
+  15          sbit ADDR1 = P1^1;
+  16          sbit ADDR2 = P1^2;
+  17          sbit ADDR3 = P1^3;
+  18          sbit ENLED = P1^4;
+  19          
+  20          void led_init(void) {
+  21   1        ADDR0 = 0;
+  22   1        ADDR1 = 1;
+  23   1        ADDR2 = 1;
+  24   1        ADDR3 = 1;
+  25   1        ENLED = 0;  
+  26   1      }
+  27          
+  28          void main(void) {
+  29   1        unsigned char i;
+  30   1        unsigned char num[8] = { 0, 0, 1, 0, 1, 0, 0, 0 };
+  31   1        led_init();
+  32   1        P0 = 0x00;
+  33   1        for(i=8;i>0;i--) {
+  34   2          P0 = P0 + (!num[8-i]<<(i-1));
+  35   2        }
+  36   1        while(1);
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     75    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

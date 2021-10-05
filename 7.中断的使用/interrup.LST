@@ -1,0 +1,72 @@
+C51 COMPILER V8.06   INTERRUP                                                              04/19/2016 01:13:03 PAGE 1   
+
+
+C51 COMPILER V8.06, COMPILATION OF MODULE INTERRUP
+OBJECT MODULE PLACED IN interrup.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE interrup.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          sbit ENLED = P1^4;
+   3          sbit ADDR3 = P1^3;
+   4          sbit ADDR2 = P1^2;
+   5          sbit ADDR1 = P1^1;
+   6          sbit ADDR0 = P1^0;
+   7          sbit LED0  = P0^0;
+   8          
+   9          void led_set(void) {
+  10   1              ADDR2 = 1;
+  11   1              ADDR1 = 1;
+  12   1              ADDR0 = 0;
+  13   1              ENLED = 0;
+  14   1              ADDR3 = 1;
+  15   1      }
+  16          
+  17          void timer0_set(void) {
+  18   1              TMOD = 0x01;
+  19   1              TH0 = 0x4C;
+  20   1              TL0 = 0x00;
+  21   1              TR0 = 1;
+  22   1      }
+  23          
+  24          void interrupt_set(void){
+  25   1              EA = 1;
+  26   1              ET0 = 1;
+  27   1      }
+  28          
+  29          static unsigned char cnt = 0;
+  30          
+  31          void main(void) {
+  32   1              led_set();
+  33   1              interrupt_set();
+  34   1              timer0_set();
+  35   1      
+  36   1              while(1);
+  37   1      }
+  38          
+  39          void interrupt_timer0(void) interrupt 1 {
+  40   1              TL0 = 0x00;
+  41   1              TH0 = 0x4C;
+  42   1              if(cnt >= 9) {
+  43   2                      LED0 = !LED0;
+  44   2                      cnt = 0;
+  45   2              }else
+  46   1                      cnt = cnt + 1;
+  47   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     70    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+C51 COMPILER V8.06   INTERRUP                                                              04/19/2016 01:13:03 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

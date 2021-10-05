@@ -1,0 +1,4 @@
+"key_debounce.obj",
+"STARTUP.obj" 
+TO "key_debounce" 
+RAMSIZE(256) 

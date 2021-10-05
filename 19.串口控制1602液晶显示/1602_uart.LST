@@ -1,0 +1,61 @@
+C51 COMPILER V9.00   1602_UART                                                             05/02/2016 13:52:54 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 1602_UART
+OBJECT MODULE PLACED IN 1602_uart.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE 1602_uart.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include"io.h"
+   3          #include"globl.h"
+   4          
+   5          void main(void){
+   6   1              unsigned char tmp[16] = {0};
+   7   1              unsigned char i = 0;
+   8   1              uart_config();
+   9   1              baud_config();
+  10   1              lcd_init();
+  11   1              while(1){
+  12   2                      for(i=0;i<16;i++){
+  13   3                              if(tmp[i]!=str0[i]){
+  14   4                                      tmp[i] = str0[i];
+  15   4                                      lcd_line1_display(str0);
+  16   4                              }
+  17   3                      }
+  18   2              };
+  19   1      }
+  20          
+  21          void uart_interrupt(void) interrupt 4 {
+  22   1              static unsigned char i = 0;
+  23   1              if(TI)
+  24   1                      TI = 0;
+  25   1              if(RI) {
+  26   2                      RI = 0;
+  27   2                      if(SBUF!=' ')
+  28   2                              if(str0[i]!='\0'){
+  29   3                                      str0[i] = SBUF;
+  30   3                                      i++;
+  31   3                              }else
+  32   2                                      i = 0;
+  33   2                      else{
+  34   3                              i = 0;
+  35   3                              lcd_clean();
+  36   3                      }
+  37   2              }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    174    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      17
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

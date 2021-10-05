@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"uart_step.obj" 
+TO "uart_step" 
+RAMSIZE(256) 

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"animation.obj" 
+TO "animation" 
+RAMSIZE(256) 

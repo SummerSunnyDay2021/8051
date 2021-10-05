@@ -1,0 +1,70 @@
+C51 COMPILER V8.06   DIG_COUNTER                                                           04/17/2016 09:01:50 PAGE 1   
+
+
+C51 COMPILER V8.06, COMPILATION OF MODULE DIG_COUNTER
+OBJECT MODULE PLACED IN dig_counter.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE dig_counter.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>
+   2          sbit ADDR3 = P1^3;
+   3          sbit ADDR2 = P1^2;
+   4          sbit ADDR1 = P1^1;
+   5          sbit ADDR0 = P1^0;
+   6          sbit ENLED = P1^4;
+   7          
+   8          unsigned char dig_num[16] = { 
+   9                  0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8,
+  10                  0x80, 0x90, 0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8E
+  11          };
+  12          
+  13          void main(void){
+  14   1              unsigned char cnt_t = 0;
+  15   1              unsigned char cnt_d = 0;
+  16   1              ADDR3 = 1;
+  17   1              ADDR2 = 0;
+  18   1              ADDR1 = 0;
+  19   1              ADDR0 = 0;
+  20   1              ENLED = 0;
+  21   1              TMOD = 0x01;
+  22   1              TH0 = 0x4C;
+  23   1              TL0 = 0x00;
+  24   1              TR0 = 1;
+  25   1              while(1){
+  26   2                      if(TF0) {
+  27   3                              TF0 = 0;
+  28   3                              TH0 = 0x4C;
+  29   3                              TL0 = 0x00;
+  30   3                              cnt_t = cnt_t + 1;
+  31   3                              if(cnt_t>=20) {
+  32   4                                      cnt_t = 0;
+  33   4                                      P0 = dig_num[cnt_d];
+  34   4                                      cnt_d = cnt_d + 1;
+  35   4                                      if(cnt_d>15)
+  36   4                                              cnt_d = 0;
+  37   4                              }
+  38   3      
+  39   3      
+  40   3                      }
+  41   2                      
+  42   2              }
+  43   1      
+  44   1              
+  45   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     61    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V8.06   DIG_COUNTER                                                           04/17/2016 09:01:50 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

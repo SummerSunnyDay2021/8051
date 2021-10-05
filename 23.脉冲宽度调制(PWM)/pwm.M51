@@ -1,0 +1,211 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/11/2016  12:28:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+G:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, pwm.obj TO pwm RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  pwm.obj (PWM)
+  G:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?ULDIV)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?ULSHR)
+  G:\KEIL\C51\LIB\C51S.LIB (?C?LIMUL)
+
+
+LINK MAP OF MODULE:  pwm (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         ?DT?PWM
+                    0011H     000FH                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?PWM
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     010EH     UNIT         ?C?LIB_CODE
+            CODE    0111H     0099H     UNIT         ?PR?TIMER0_CALC?PWM
+            CODE    01AAH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0236H     0019H     UNIT         ?PR?MAIN?PWM
+            CODE    024FH     0011H     UNIT         ?PR?TIMER0_CONFIG?PWM
+            CODE    0260H     000CH     UNIT         ?C_INITSEG
+            CODE    026CH     000BH     UNIT         ?PR?LED_INIT?PWM
+            CODE    0277H     0006H     UNIT         ?PR?TIMER0_INIT?PWM
+
+
+
+OVERLAY MAP OF MODULE:   pwm (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PWM
+  +--> ?C_INITSEG
+
+?PR?MAIN?PWM
+  +--> ?PR?LED_INIT?PWM
+  +--> ?PR?TIMER0_INIT?PWM
+  +--> ?PR?TIMER0_CALC?PWM
+  +--> ?PR?TIMER0_CONFIG?PWM
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/11/2016  12:28:47  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  pwm (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:01AAH         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:01ADH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:01AAH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:01AAH         LINE#         133
+  C:01ACH         LINE#         134
+  C:01ADH         LINE#         135
+  C:01AEH         LINE#         136
+  C:01B0H         LINE#         185
+  C:01B3H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        PWM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  B:0020H.0       PUBLIC        pwm_out
+  D:00B8H         PUBLIC        IP
+  C:0236H         PUBLIC        main
+  D:0008H         PUBLIC        off_th0
+  D:0009H         PUBLIC        off_tl0
+  C:024FH         PUBLIC        timer0_config
+  D:000AH         PUBLIC        freq
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/11/2016  12:28:47  PAGE 3
+
+
+  D:0088H         PUBLIC        TCON
+  B:0080H.0       PUBLIC        Led0
+  D:000EH         PUBLIC        duty
+  C:0111H         PUBLIC        timer0_calc
+  B:0088H.5       PUBLIC        TF0
+  D:000FH         PUBLIC        on_th0
+  B:0090H.0       PUBLIC        ADDR0
+  D:008CH         PUBLIC        TH0
+  C:026CH         PUBLIC        led_init
+  B:0090H.1       PUBLIC        ADDR1
+  B:0090H.2       PUBLIC        ADDR2
+  D:0010H         PUBLIC        on_tl0
+  B:0090H.3       PUBLIC        ADDR3
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  B:0090H.4       PUBLIC        ENLED
+  C:0277H         PUBLIC        timer0_init
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0236H         LINE#         14
+  C:0236H         LINE#         15
+  C:0239H         LINE#         16
+  C:023CH         LINE#         17
+  C:023FH         LINE#         18
+  C:0241H         LINE#         19
+  C:0241H         LINE#         20
+  C:0244H         LINE#         21
+  C:0246H         LINE#         22
+  C:0249H         LINE#         23
+  C:024BH         LINE#         24
+  C:024DH         LINE#         25
+  C:024DH         LINE#         26
+  -------         ENDPROC       MAIN
+  -------         PROC          LED_INIT
+  C:026CH         LINE#         30
+  C:026CH         LINE#         31
+  C:026EH         LINE#         32
+  C:0270H         LINE#         33
+  C:0272H         LINE#         34
+  C:0274H         LINE#         35
+  C:0276H         LINE#         36
+  -------         ENDPROC       LED_INIT
+  -------         PROC          TIMER0_INIT
+  C:0277H         LINE#         38
+  C:0277H         LINE#         39
+  C:027AH         LINE#         40
+  C:027CH         LINE#         41
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0_CALC
+  C:0111H         LINE#         43
+  C:0111H         LINE#         44
+  C:013CH         LINE#         45
+  C:0157H         LINE#         46
+  C:0188H         LINE#         47
+  C:01A9H         LINE#         48
+  -------         ENDPROC       TIMER0_CALC
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/11/2016  12:28:47  PAGE 4
+
+
+  -------         PROC          TIMER0_CONFIG
+  C:024FH         LINE#         51
+  C:024FH         LINE#         52
+  C:0252H         LINE#         53
+  C:0255H         LINE#         54
+  C:0258H         LINE#         55
+  C:0259H         LINE#         56
+  C:025CH         LINE#         57
+  C:025FH         LINE#         58
+  C:025FH         LINE#         59
+  -------         ENDPROC       TIMER0_CONFIG
+  -------         ENDMOD        PWM
+
+  -------         MODULE        ?C?ULDIV
+  C:003FH         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+  -------         MODULE        ?C?ULSHR
+  C:00D1H         PUBLIC        ?C?ULSHR
+  -------         ENDMOD        ?C?ULSHR
+
+  -------         MODULE        ?C?LIMUL
+  C:00E4H         PUBLIC        ?C?LIMUL
+  -------         ENDMOD        ?C?LIMUL
+
+Program Size: data=18.1 xdata=0 code=637
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

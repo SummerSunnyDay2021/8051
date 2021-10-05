@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"led_on.obj" 
+TO "led_on" 
+RAMSIZE(256) 

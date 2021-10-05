@@ -1,0 +1,71 @@
+C51 COMPILER V8.06   LED_DOT                                                               04/16/2016 02:09:18 PAGE 1   
+
+
+C51 COMPILER V8.06, COMPILATION OF MODULE LED_DOT
+OBJECT MODULE PLACED IN led_dot.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE led_dot.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>
+   2          sbit ADDR0 = P1^0;
+   3          sbit ADDR1 = P1^1;
+   4          sbit ADDR2 = P1^2;
+   5          sbit ADDR3 = P1^3;
+   6          sbit ENLED = P1^4;
+   7          
+   8          void delay(unsigned int time){
+   9   1              while(time--);
+  10   1      }
+  11          
+  12          void main(void){
+  13   1              unsigned int pic[8] = { 0xFF,0xFF,0xFF,0xEF,0xFF,0xEF,0xC7,0xD7 };
+  14   1              ENLED = 0;
+  15   1              ADDR3 = 0;
+  16   1              while(1){
+  17   2                      char cnt;
+  18   2                      for(cnt=0;cnt<8;cnt++){
+  19   3                              switch(cnt) {
+  20   4                                      case 0: ADDR2 = 0, ADDR1 = 0, ADDR0 = 0; break;
+  21   4                                      case 1: ADDR2 = 0, ADDR1 = 0, ADDR0 = 1; break;
+  22   4                                      case 2: ADDR2 = 0, ADDR1 = 1, ADDR0 = 0; break;
+  23   4                                      case 3: ADDR2 = 0, ADDR1 = 1, ADDR0 = 1; break;
+  24   4                                      case 4: ADDR2 = 1, ADDR1 = 0, ADDR0 = 0; break;
+  25   4                                      case 5: ADDR2 = 1, ADDR1 = 0, ADDR0 = 1; break;
+  26   4                                      case 6: ADDR2 = 1, ADDR1 = 1, ADDR0 = 0; break;
+  27   4                                      case 7: ADDR2 = 1, ADDR1 = 1, ADDR0 = 1; break;
+  28   4                                      default: break;
+  29   4                              }
+  30   3      
+  31   3                              switch(cnt) {
+  32   4                                      case 0: P0 = pic[0]; break;
+  33   4                                      case 1: P0 = pic[1]; break;
+  34   4                                      case 2: P0 = pic[2]; break;
+  35   4                                      case 3: P0 = pic[3]; break;
+  36   4                                      case 4: P0 = pic[4]; break;
+  37   4                                      case 5: P0 = pic[5]; break;
+  38   4                                      case 6: P0 = pic[6]; break;
+  39   4                                      case 7: P0 = pic[7]; break;
+  40   4                                      default:P0 = 0xFF;       break;
+  41   4                              }
+  42   3                              delay(100);
+  43   3                              P0 = 0xFF;
+  44   3                      }
+  45   2              }       
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    229    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      17
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V8.06   LED_DOT                                                               04/16/2016 02:09:18 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

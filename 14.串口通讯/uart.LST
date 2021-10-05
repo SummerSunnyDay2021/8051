@@ -1,0 +1,109 @@
+C51 COMPILER V9.00   UART                                                                  04/27/2016 04:35:45 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN uart.OBJ
+COMPILER INVOKED BY: G:\Keil\C51\BIN\C51.EXE uart.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*
+   2           *      
+   3          
+   4          
+   5                  
+   6           1      SCON --- 串口控制寄存器
+   7                  7       6       5       4       3       2       1       0               ---- 可位寻址，复位后置 0
+   8                  SM0     SM1     SM2     REN     TB8     RB8     TI      RI
+   9          
+  10                          -- SM0/SM1 ，通讯模式，这里用 模式 1，也就是 SM0 = 0， SM1 = 1
+  11                          -- 多机通信控制位（基本不用）
+  12                          -- 使能串行接收。REN = 1 可以接收数据， REN = 0 单片机拒绝接受数据
+  13                          -- 模式2
+  14                          -- 模式2
+  15                          -- 发送中断标志位 TI， 当 TI = 1 表示发送电路发送到停止位的中间位置，由硬�
+             -�置 1，进入中断后需要软件清 0
+  16                          -- 接受中断标志位 RI， 当 RI = 1 表示接收电路接收到停止位的中间位置，由硬�
+             -�置 1，进入中断后需要软件清 0
+  17                          
+  18                          注意： 串口中断号为 4
+  19                          
+  20           2      波特率发生器
+  21                          串口信号具体由定时器 1 或者 定时器 2 来产生（不能用定时器 0）
+  22                          需要将 定时器 设为自动重装模式
+  23                          定时器初值计算公式 TH1 = TL1 = 256 - 晶振值/12/2/16/波特率，如下：
+  24                                  256 - 11059200/12/2/16/9600 = 256 - 11059200/12/32/9600 = 253 = 0xFF - 2 = 0xFD
+  25                          注意： 使用波特率发生器时，定时器不能用作其他用途，应当关闭定时器中断
+  26          
+  27                          电源管理寄存器 PCON 的最高位置 1 时，即 PCON = PCON | 0x80，可将波特率翻倍，那�
+             -��波特率的计算公式变为：
+  28                                  TH1 = TL1 = 256 - 晶振值/12/16/波特率
+  29                          最后启动定时器即可， TR1 = 1；
+  30                          
+  31           3      串口发送接受缓存寄存器 SBUF
+  32                          SBUF 实际上是两个寄存器，但两个寄存器重名并且地址也一样，硬件根据程序�
+             -�读数据还是写数据来区分两个寄存器的使用
+  33          
+  34           ---------------------------------------------------------
+  35                  实验结果：
+  36                  如果将波特率发生器 倍频，最高波特率为 28800
+  37                  不倍频的话 最高 14400，理论值应该为 19200，（由于没有逻辑分析仪，估计错误�
+             -�现的原因为 晶振 精度问题）
+  38          
+  39                  关于计算公式除不尽的问题， STC 手册里有相当详细的说明。
+  40           ---------------------------------------------------------      
+  41          **/
+  42          
+  43          #include<reg52.h>
+  44          
+  45          unsigned char code uart_baud = 256 - 11059200/12/32/14400;
+  46          
+  47          void uart_config(void);
+  48          void baud_config(void);
+  49          
+  50          void main(void){
+C51 COMPILER V9.00   UART                                                                  04/27/2016 04:35:45 PAGE 2   
+
+  51   1              uart_config();
+  52   1              baud_config();
+  53   1              while(1);
+  54   1      }
+  55          
+  56          void uart_config(void){
+  57   1      //      PCON = PCON | 0x80;
+  58   1              SCON = 0x50;
+  59   1              ES = 1;         // 串口中断使能
+  60   1      }
+  61          
+  62          void baud_config(void){
+  63   1              TMOD = TMOD & 0x0F;             // 清零 高 8 位
+  64   1              TMOD = TMOD | 0x20;             // 高 8 位设为 4'b0010 即自动重装模式
+  65   1              EA = 1;
+  66   1              IT1 = 0;                                //关闭 定时器 1 中断
+  67   1              TH1 = uart_baud;
+  68   1              TL1 = uart_baud;
+  69   1              TR1 = 1;
+  70   1      }
+  71          
+  72          void uart_interrupt(void) interrupt 4 {
+  73   1              if(TI)
+  74   1                      TI = 0;
+  75   1              if(RI) {
+  76   2                      SBUF = SBUF + 1;
+  77   2                      RI = 0;
+  78   2              }
+  79   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     50    ----
+   CONSTANT SIZE    =      1    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

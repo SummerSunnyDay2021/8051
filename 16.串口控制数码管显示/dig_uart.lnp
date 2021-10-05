@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"dig_driver.obj",
+"mian.obj",
+"uart_driver.obj" 
+TO "dig_uart" 
+RAMSIZE(256) 

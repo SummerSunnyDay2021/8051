@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>礦ision3 Build Log</h1>
+<h2>Project:</h2>
+D:\Keil_51\4.定时器使用\timer.uv2
+Project File Date:  04/17/2016
+
+<h2>Output:</h2>
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+TIMER.C(62): 错误 C141: syntax error near 'unsigned'
+TIMER.C(62): 错误 C202: 'cnt': undefined identifier
+TIMER.C(64): 错误 C100: unprintable character 0xA3 skipped
+TIMER.C(64): 错误 C100: unprintable character 0xFB skipped
+TIMER.C(65): 错误 C202: 'cnt': undefined identifier
+TIMER.C(66): 错误 C100: unprintable character 0xA3 skipped
+TIMER.C(66): 错误 C100: unprintable character 0xBB skipped
+TIMER.C(67): 错误 C141: syntax error near 'TH0'
+TIMER.C(69): 错误 C202: 'cnt': undefined identifier
+TIMER.C(71): 错误 C202: 'cnt': undefined identifier
+TIMER.C(73): 错误 C100: unprintable character 0xA3 skipped
+目标未产生
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+TIMER.C(64): 错误 C100: unprintable character 0xA3 skipped
+TIMER.C(64): 错误 C100: unprintable character 0xFB skipped
+TIMER.C(66): 错误 C100: unprintable character 0xA3 skipped
+TIMER.C(66): 错误 C100: unprintable character 0xBB skipped
+TIMER.C(67): 错误 C141: syntax error near 'TH0'
+TIMER.C(73): 错误 C100: unprintable character 0xA3 skipped
+目标未产生
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+TIMER.C(66): 错误 C100: unprintable character 0xA3 skipped
+TIMER.C(66): 错误 C100: unprintable character 0xBB skipped
+TIMER.C(67): 错误 C141: syntax error near 'TH0'
+目标未产生
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+TIMER.C(62): 错误 C141: syntax error near 'unsigned'
+TIMER.C(62): 错误 C202: 'cnt': undefined identifier
+TIMER.C(65): 错误 C202: 'cnt': undefined identifier
+TIMER.C(69): 错误 C202: 'cnt': undefined identifier
+TIMER.C(71): 错误 C202: 'cnt': undefined identifier
+目标未产生
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+连接 ...
+Program Size: data=10.0 xdata=0 code=66
+创建 HEX 文件 "timer" ...
+"timer" - 0 个错误, 0 个警告。
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+连接 ...
+Program Size: data=10.0 xdata=0 code=63
+创建 HEX 文件 "timer" ...
+"timer" - 0 个错误, 0 个警告。
+创建目标 '目标 1'
+PA51汇编 STARTUP.A51 ...
+编译 timer.c ...
+连接 ...
+Program Size: data=10.0 xdata=0 code=63
+创建 HEX 文件 "timer" ...
+"timer" - 0 个错误, 0 个警告。
+</pre>
+</body>
+</html>

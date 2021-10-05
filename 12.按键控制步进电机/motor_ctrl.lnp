@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"step_motor.obj" 
+TO "motor_ctrl" 
+RAMSIZE(256) 

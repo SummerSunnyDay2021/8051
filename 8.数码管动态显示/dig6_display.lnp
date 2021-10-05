@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"dig6_display.obj" 
+TO "dig6_display" 
+RAMSIZE(256) 
